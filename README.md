@@ -76,7 +76,7 @@ DevNarrate is built as an event-driven, asynchronous AI system that converts rep
                 └──────────┬───────────┘
                            ▼
                 ┌──────────────────────┐
-                │ LangGraph Orchestrator│
+                │LangGraph Orchestrator│
                 └──────────┬───────────┘
         ┌──────────────────┼──────────────────┐
         ▼                  ▼                  ▼
@@ -101,7 +101,7 @@ DevNarrate is built as an event-driven, asynchronous AI system that converts rep
                 ┌──────────────────────┐
                 │   API / Dashboard    │
                 └──────────────────────┘
-````
+```
 
 The architecture emphasizes separation of concerns, scalability, and reliability through a layered design.
 
@@ -255,5 +255,7 @@ DevNarrate ensures that story is understood, structured, and shareable.
 ## 📜 License
 
 MIT License
+
+```
 
 ```

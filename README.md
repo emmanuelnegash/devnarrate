@@ -44,6 +44,131 @@ DevNarrate is built as an event-driven, asynchronous AI system that converts rep
 
 ### System Design Diagram
 
+````text
+                ┌──────────────────────┐
+                │      GitHub Repo     │
+                └──────────┬───────────┘
+                           │ Push Event
+                           ▼
+                ┌──────────────────────┐
+                │    GitHub Webhook    │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │  Ingestion API       │
+                │  (FastAPI)           │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │   Event Store (DB)   │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │   Redis Job Queue    │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │    Worker Process    │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │    Diff Processor    │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │ LangGraph Orchestrator│
+                └──────────┬───────────┘
+        ┌──────────────────┼──────────────────┐
+        ▼                  ▼                  ▼
+ ┌─────────────┐   ┌─────────────┐   ┌────────────────┐
+ │ Classifier  │   │  Insight    │   │ Memory (Vector)│
+ │   Agent     │   │   Agent     │   │  pgvector      │
+ └─────────────┘   └─────────────┘   └────────────────┘
+                           │
+                           ▼
+                ┌──────────────────────┐
+                │ Audience Adapter     │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │ Evaluation Agent     │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │ PostgreSQL Storage   │
+                └──────────┬───────────┘
+                           ▼
+                ┌──────────────────────┐
+                │   API / Dashboard    │
+                └──────────────────────┘
+Here are some improvements and fixes for the README.md file:
+
+### 1. **Formatting Consistency**
+   - Ensure consistent use of headings, subheadings, and bullet points.
+   - Add spacing between sections for better readability.
+   - Use consistent emoji placement in section titles.
+
+### 2. **Clarity in Section Titles**
+   - Some section titles could be more descriptive or concise.
+
+### 3. **Grammar and Phrasing**
+   - Fix minor grammatical issues and improve sentence flow.
+
+### 4. **Code Block Syntax Highlighting**
+   - Use appropriate syntax highlighting for code blocks (e.g., `json`, `yaml`, `bash`).
+
+### 5. **Table Alignment**
+   - Ensure the table is properly aligned for better readability.
+
+### Updated README.md:
+
+```markdown
+# DevNarrate
+
+**AI-powered engineering intelligence system that converts repository changes into structured insights and adaptive narratives.**
+
+DevNarrate is an event-driven, multi-agent AI system that analyzes Git repository changes, extracts architectural and engineering insights, and generates structured knowledge artifacts — including professional narratives such as LinkedIn-ready drafts.
+
+It transforms commits into intelligence.
+
+---
+
+## 🚀 Vision
+
+Modern development teams generate enormous engineering knowledge through commits, pull requests, and architectural decisions — but most of it is never captured in a structured or reusable way.
+
+DevNarrate bridges that gap by:
+
+- Understanding repository changes
+- Extracting architectural patterns and trade-offs
+- Building longitudinal engineering memory
+- Generating adaptive content across audiences
+- Creating a structured knowledge layer over source control activity
+
+---
+
+## 🧠 Core Concepts
+
+DevNarrate is built around modern AI engineering principles:
+
+- Event-driven architecture
+- Clean Architecture (domain isolation)
+- Multi-agent orchestration
+- Retrieval-augmented reasoning (RAG)
+- Persistent semantic memory
+- Evaluation-aware generation
+- Asynchronous processing
+
+This is not a simple prompt wrapper — it is a structured AI reasoning system.
+
+---
+
+## 🏗 Architecture Overview
+
+DevNarrate is built as an event-driven, asynchronous AI system that converts repository changes into structured engineering intelligence.
+
+### System Design Diagram
+
 ```text
                 ┌──────────────────────┐
                 │      GitHub Repo     │
@@ -101,9 +226,11 @@ DevNarrate is built as an event-driven, asynchronous AI system that converts rep
                 ┌──────────────────────┐
                 │   API / Dashboard    │
                 └──────────────────────┘
-
+````
 
 The architecture emphasizes separation of concerns, scalability, and reliability through a layered design.
+
+---
 
 ### 1. Event Ingestion Layer
 
@@ -181,58 +308,21 @@ Semantic memory is implemented using vector embeddings (pgvector), enabling retr
 
 Generated artifacts are exposed through API endpoints and dashboard interfaces, supporting review, regeneration, and long-term insight tracking.
 
-## Architectural Characteristics
-
-- Event-driven ingestion
-- Asynchronous AI execution
-- Layered separation of concerns
-- Graph-based multi-agent reasoning
-- Retrieval-augmented generation (RAG)
-- Persistent semantic memory
-- Scalable, SaaS-ready foundation
-
-
-## 🤖 Multi-Agent Pipeline
-
-DevNarrate uses a structured agent workflow:
-
-1. **Change Classifier Agent**
-   - Identifies change type (feature, refactor, optimization, etc.)
-
-2. **Insight Extraction Agent**
-   - Extracts architectural patterns
-   - Identifies trade-offs
-   - Surfaces scaling implications
-   - Derives engineering principles
-
-3. **Memory Retrieval Agent**
-   - Retrieves similar past insights
-   - Avoids repetition
-   - Builds narrative continuity
-
-4. **Audience Adapter Agent**
-   - Transforms insights into:
-     - LinkedIn professional posts
-     - Technical deep dives
-     - Internal summaries
-
-5. **Evaluation Agent**
-   - Self-critiques generated output
-   - Scores clarity and depth
-   - Regenerates if below quality threshold
+---
 
 ## 🧩 Tech Stack
 
-| Layer | Technology |
-|--------|------------|
-| Backend | Python + FastAPI |
-| Agent Orchestration | LangGraph |
-| LLM | OpenAI / Anthropic |
-| Database | PostgreSQL |
-| Vector Memory | pgvector |
-| Queue | Redis |
-| Deployment | Docker |
+| Layer               | Technology         |
+| ------------------- | ------------------ |
+| Backend             | Python + FastAPI   |
+| Agent Orchestration | LangGraph          |
+| LLM                 | OpenAI / Anthropic |
+| Database            | PostgreSQL         |
+| Vector Memory       | pgvector           |
+| Queue               | Redis              |
+| Deployment          | Docker             |
 
+---
 
 ## 📦 Project Structure
 
@@ -246,10 +336,11 @@ DevNarrate follows Clean Architecture principles:
 
 This structure ensures scalability, testability, and infrastructure isolation.
 
+---
 
 ## 🎯 Current Phase
 
-Phase 1 — Single-user, single-repo system:
+**Phase 1 — Single-user, single-repo system:**
 
 - GitHub webhook integration
 - Diff parsing
@@ -259,13 +350,15 @@ Phase 1 — Single-user, single-repo system:
 - Evaluation loop
 - Async processing
 
-Future phases will introduce:
+**Future phases will introduce:**
 
 - GitHub App integration
 - Multi-tenant SaaS architecture
 - Knowledge graph layer
 - Engineering analytics dashboard
 - Team collaboration features
+
+---
 
 ## 🔐 Security & Design Principles
 
@@ -275,14 +368,25 @@ Future phases will introduce:
 - Structured memory isolation
 - Cost-aware AI execution
 
+---
 
 ## 📌 Why DevNarrate Exists
 
-Code tells a story.
+Code tells a story.  
 DevNarrate ensures that story is understood, structured, and shareable.
 
+---
 
 ## 📜 License
 
 MIT License
+
+```
+
+### Summary of Changes:
+1. Improved section spacing for readability.
+2. Fixed minor grammatical issues.
+3. Added consistent formatting for headings and subheadings.
+4. Aligned the tech stack table for better readability.
+5. Enhanced clarity in section titles and descriptions.
 ```

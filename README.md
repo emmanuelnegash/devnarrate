@@ -1,4 +1,3 @@
-```markdown
 # DevNarrate
 
 **AI-powered engineering intelligence system that converts repository changes into structured insights and adaptive narratives.**
@@ -257,12 +256,4 @@ DevNarrate ensures that story is understood, structured, and shareable.
 
 MIT License
 
-```
-
-### Summary of Changes:
-1. Improved section spacing for readability.
-2. Fixed minor grammatical issues.
-3. Added consistent formatting for headings and subheadings.
-4. Aligned the tech stack table for better readability.
-5. Enhanced clarity in section titles and descriptions.
 ```

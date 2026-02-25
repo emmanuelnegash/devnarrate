@@ -181,8 +181,6 @@ Semantic memory is implemented using vector embeddings (pgvector), enabling retr
 
 Generated artifacts are exposed through API endpoints and dashboard interfaces, supporting review, regeneration, and long-term insight tracking.
 
----
-
 ## Architectural Characteristics
 
 - Event-driven ingestion
@@ -193,10 +191,6 @@ Generated artifacts are exposed through API endpoints and dashboard interfaces, 
 - Persistent semantic memory
 - Scalable, SaaS-ready foundation
 
-
-
-
----
 
 ## 🤖 Multi-Agent Pipeline
 
@@ -227,8 +221,6 @@ DevNarrate uses a structured agent workflow:
    - Scores clarity and depth
    - Regenerates if below quality threshold
 
----
-
 ## 🧩 Tech Stack
 
 | Layer | Technology |
@@ -241,7 +233,6 @@ DevNarrate uses a structured agent workflow:
 | Queue | Redis |
 | Deployment | Docker |
 
----
 
 ## 📦 Project Structure
 
@@ -255,7 +246,6 @@ DevNarrate follows Clean Architecture principles:
 
 This structure ensures scalability, testability, and infrastructure isolation.
 
----
 
 ## 🎯 Current Phase
 
@@ -277,8 +267,6 @@ Future phases will introduce:
 - Engineering analytics dashboard
 - Team collaboration features
 
----
-
 ## 🔐 Security & Design Principles
 
 - Webhook signature validation
@@ -287,14 +275,12 @@ Future phases will introduce:
 - Structured memory isolation
 - Cost-aware AI execution
 
----
 
 ## 📌 Why DevNarrate Exists
 
 Code tells a story.
 DevNarrate ensures that story is understood, structured, and shareable.
 
----
 
 ## 📜 License
 

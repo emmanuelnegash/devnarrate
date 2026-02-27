@@ -1,7 +1,6 @@
 from fastapi import FastAPI
+from src.core.config import settings
+from src.core.logging import logger
 
-app = FastAPI(title="DevNarrate API")
-
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+app = FastAPI(title=settings.app_name)
+logger.info("DevNarrate API started")

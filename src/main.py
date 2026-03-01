@@ -1,14 +1,16 @@
+from __future__ import annotations
+
 from contextlib import asynccontextmanager
+from typing import Any
 
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 
 from src.core.config import settings
 from src.core.logging import logger
-
-from src.infrastructure.database.session import engine
 from src.infrastructure.database.models import Base
-
+from src.infrastructure.database.session import engine
 from src.interfaces.api.routes import dev_test
 
 
@@ -16,8 +18,12 @@ from src.interfaces.api.routes import dev_test
 async def lifespan(app: FastAPI):
     logger.info("DevNarrate API starting...")
 
-    # Create database tables on startup
-    Base.metadata.create_all(bind=engine)
+    # Only auto-create tables in dev/test scenarios.
+    # (Prefer migrations in production)
+    auto_create = bool(getattr(settings, "db_auto_create_tables", False))
+    if auto_create:
+        logger.info("Auto-creating database tables (db_auto_create_tables=True)")
+        await run_in_threadpool(Base.metadata.create_all, bind=engine)
 
     yield
 
@@ -25,8 +31,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title=settings.app_name,
-    debug=getattr(settings, "debug", False),
+    title=getattr(settings, "app_name", "DevNarrate"),
+    debug=bool(getattr(settings, "debug", False)),
     lifespan=lifespan,
 )
 
@@ -35,12 +41,16 @@ app.include_router(dev_test.router)
 
 
 @app.get("/health", tags=["system"])
-async def health():
-    return {"status": "ok", "app": settings.app_name}
+async def health() -> dict[str, Any]:
+    return {"status": "ok", "app": getattr(settings, "app_name", "DevNarrate")}
 
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
+    # In debug, let FastAPI/Starlette display the default debug error page
+    if bool(getattr(settings, "debug", False)):
+        raise exc
+
     logger.exception(
         "Unhandled error",
         extra={"path": str(request.url.path), "method": request.method},

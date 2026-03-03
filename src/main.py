@@ -18,8 +18,6 @@ from src.interfaces.api.routes import dev_test
 async def lifespan(app: FastAPI):
     logger.info("DevNarrate API starting...")
 
-    # Only auto-create tables in dev/test scenarios.
-    # (Prefer migrations in production)
     auto_create = bool(getattr(settings, "db_auto_create_tables", False))
     if auto_create:
         logger.info("Auto-creating database tables (db_auto_create_tables=True)")

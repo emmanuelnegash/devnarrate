@@ -47,7 +47,6 @@ async def health() -> dict[str, Any]:
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    # In debug, let FastAPI/Starlette display the default debug error page
     if bool(getattr(settings, "debug", False)):
         raise exc
 
